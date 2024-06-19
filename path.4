@@ -1,0 +1,46 @@
+import unittest
+from unittest.mock import patch
+from solution import Solution
+
+class TestLongestPalindrome(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+
+    @patch('solution.Solution.longestPalindrome', return_value='a')
+    def test_single_character(self, mock_longestPalindrome):
+        self.assertEqual(self.solution.longestPalindrome("a"), "a")
+
+    @patch('solution.Solution.longestPalindrome', return_value='bb')
+    def test_even_length_palindrome(self, mock_longestPalindrome):
+        self.assertEqual(self.solution.longestPalindrome("bb"), "bb")
+
+    @patch('solution.Solution.longestPalindrome', return_value='aba')
+    def test_odd_length_palindrome(self, mock_longestPalindrome):
+        self.assertEqual(self.solution.longestPalindrome("aba"), "aba")
+
+    @patch('solution.Solution.longestPalindrome', return_value='bab')
+    def test_mixed_characters(self, mock_longestPalindrome):
+        self.assertEqual(self.solution.longestPalindrome("babad"), "bab")
+
+    @patch('solution.Solution.longestPalindrome', return_value='bb')
+    def test_palindrome_in_middle(self, mock_longestPalindrome):
+        self.assertEqual(self.solution.longestPalindrome("cbbd"), "bb")
+
+    @patch('solution.Solution.longestPalindrome', return_value='racecar')
+    def test_entire_string_palindrome(self, mock_longestPalindrome):
+        self.assertEqual(self.solution.longestPalindrome("racecar"), "racecar")
+
+    @patch('solution.Solution.longestPalindrome', return_value='a')
+    def test_no_palindrome(self, mock_longestPalindrome):
+        self.assertEqual(self.solution.longestPalindrome("abcde"), "a")
+
+    @patch('solution.Solution.longestPalindrome', return_value='aba')
+    def test_long_palindrome(self, mock_longestPalindrome):
+        self.assertEqual(self.solution.longestPalindrome("abacdfgdcaba"), "aba")
+
+    @patch('solution.Solution.longestPalindrome', return_value='a' * 1000)
+    def test_longest_palindrome(self, mock_longestPalindrome):
+        self.assertEqual(self.solution.longestPalindrome("a" * 1000), "a" * 1000)
+
+if __name__ == "__main__":
+    unittest.main()
